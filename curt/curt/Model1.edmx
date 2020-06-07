@@ -1,0 +1,591 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Courses_projectModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Course_Work">
+          <Key>
+            <PropertyRef Name="Theme" />
+          </Key>
+          <Property Name="Subjects_code" Type="int" />
+          <Property Name="Student_code" Type="int" />
+          <Property Name="disciplines_code" Type="int" />
+          <Property Name="Theme" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="YearDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Disciplines">
+          <Key>
+            <PropertyRef Name="Disciplines_id" />
+          </Key>
+          <Property Name="Disciplines_id" Type="int" Nullable="false" />
+          <Property Name="Disciplines_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="Groups_code" />
+          </Key>
+          <Property Name="Groups_code" Type="int" Nullable="false" />
+          <Property Name="Groups_id" Type="int" Nullable="false" />
+          <Property Name="disciplines_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Guide">
+          <Key>
+            <PropertyRef Name="DateYear" />
+          </Key>
+          <Property Name="subjects_id" Type="int" />
+          <Property Name="teachers_id" Type="int" />
+          <Property Name="DateYear" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Journal">
+          <Key>
+            <PropertyRef Name="Journal_id" />
+          </Key>
+          <Property Name="Journal_id" Type="int" Nullable="false" />
+          <Property Name="students_code" Type="int" />
+          <Property Name="StageOne" Type="int" />
+          <Property Name="StageTwo" Type="int" />
+          <Property Name="Result" Type="int" />
+        </EntityType>
+        <EntityType Name="Registr">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SaveWork">
+          <Key>
+            <PropertyRef Name="SaveWork_id" />
+          </Key>
+          <Property Name="SaveWork_id" Type="int" Nullable="false" />
+          <Property Name="SaveWork_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="Student_id" />
+          </Key>
+          <Property Name="Student_id" Type="int" Nullable="false" />
+          <Property Name="Fam" Type="varchar" MaxLength="50" />
+          <Property Name="Fname" Type="varchar" MaxLength="50" />
+          <Property Name="Last_name" Type="varchar" MaxLength="50" />
+          <Property Name="groups_code" Type="int" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="Subjects_id" />
+          </Key>
+          <Property Name="Subjects_id" Type="int" Nullable="false" />
+          <Property Name="Subjects_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Teachers">
+          <Key>
+            <PropertyRef Name="Teachers_id" />
+          </Key>
+          <Property Name="Teachers_id" Type="int" Nullable="false" />
+          <Property Name="Teachers_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="fk_disciplines_code">
+          <End Role="Disciplines" Type="Self.Disciplines" Multiplicity="0..1" />
+          <End Role="Course_Work" Type="Self.Course_Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disciplines">
+              <PropertyRef Name="Disciplines_id" />
+            </Principal>
+            <Dependent Role="Course_Work">
+              <PropertyRef Name="disciplines_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_disciplines_id">
+          <End Role="Disciplines" Type="Self.Disciplines" Multiplicity="0..1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disciplines">
+              <PropertyRef Name="Disciplines_id" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="disciplines_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_groups_code">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Groups_code" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="groups_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Student_code">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="Course_Work" Type="Self.Course_Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Student_id" />
+            </Principal>
+            <Dependent Role="Course_Work">
+              <PropertyRef Name="Student_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_students_code">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Student_id" />
+            </Principal>
+            <Dependent Role="Journal">
+              <PropertyRef Name="students_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Subject_code">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
+          <End Role="Course_Work" Type="Self.Course_Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Subjects_id" />
+            </Principal>
+            <Dependent Role="Course_Work">
+              <PropertyRef Name="Subjects_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_subjects_id">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
+          <End Role="Guide" Type="Self.Guide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Subjects_id" />
+            </Principal>
+            <Dependent Role="Guide">
+              <PropertyRef Name="subjects_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_teachers_id">
+          <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1" />
+          <End Role="Guide" Type="Self.Guide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teachers">
+              <PropertyRef Name="Teachers_id" />
+            </Principal>
+            <Dependent Role="Guide">
+              <PropertyRef Name="teachers_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Courses_projectModelContainer">
+          <EntitySet Name="Course_Work" EntityType="Self.Course_Work" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Disciplines" EntityType="Self.Disciplines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Guide" EntityType="Self.Guide" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Journal" EntityType="Self.Journal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registr" EntityType="Self.Registr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SaveWork" EntityType="Self.SaveWork" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_disciplines_code" Association="Self.fk_disciplines_code">
+            <End Role="Disciplines" EntitySet="Disciplines" />
+            <End Role="Course_Work" EntitySet="Course_Work" />
+          </AssociationSet>
+          <AssociationSet Name="fk_disciplines_id" Association="Self.fk_disciplines_id">
+            <End Role="Disciplines" EntitySet="Disciplines" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="fk_groups_code" Association="Self.fk_groups_code">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Student_code" Association="Self.fk_Student_code">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Course_Work" EntitySet="Course_Work" />
+          </AssociationSet>
+          <AssociationSet Name="fk_students_code" Association="Self.fk_students_code">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Journal" EntitySet="Journal" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Subject_code" Association="Self.fk_Subject_code">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Course_Work" EntitySet="Course_Work" />
+          </AssociationSet>
+          <AssociationSet Name="fk_subjects_id" Association="Self.fk_subjects_id">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Guide" EntitySet="Guide" />
+          </AssociationSet>
+          <AssociationSet Name="fk_teachers_id" Association="Self.fk_teachers_id">
+            <End Role="Teachers" EntitySet="Teachers" />
+            <End Role="Guide" EntitySet="Guide" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Courses_projectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Course_Work">
+          <Key>
+            <PropertyRef Name="Theme" />
+          </Key>
+          <Property Name="Subjects_code" Type="Int32" />
+          <Property Name="Student_code" Type="Int32" />
+          <Property Name="disciplines_code" Type="Int32" />
+          <Property Name="Theme" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="YearDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Disciplines" Relationship="Self.fk_disciplines_code" FromRole="Course_Work" ToRole="Disciplines" />
+          <NavigationProperty Name="Students" Relationship="Self.fk_Student_code" FromRole="Course_Work" ToRole="Students" />
+          <NavigationProperty Name="Subjects" Relationship="Self.fk_Subject_code" FromRole="Course_Work" ToRole="Subjects" />
+        </EntityType>
+        <EntityType Name="Disciplines">
+          <Key>
+            <PropertyRef Name="Disciplines_id" />
+          </Key>
+          <Property Name="Disciplines_id" Type="Int32" Nullable="false" />
+          <Property Name="Disciplines_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Course_Work" Relationship="Self.fk_disciplines_code" FromRole="Disciplines" ToRole="Course_Work" />
+          <NavigationProperty Name="Groups" Relationship="Self.fk_disciplines_id" FromRole="Disciplines" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="Groups_code" />
+          </Key>
+          <Property Name="Groups_code" Type="Int32" Nullable="false" />
+          <Property Name="Groups_id" Type="Int32" Nullable="false" />
+          <Property Name="disciplines_id" Type="Int32" />
+          <NavigationProperty Name="Disciplines" Relationship="Self.fk_disciplines_id" FromRole="Groups" ToRole="Disciplines" />
+          <NavigationProperty Name="Students" Relationship="Self.fk_groups_code" FromRole="Groups" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Guide">
+          <Key>
+            <PropertyRef Name="DateYear" />
+          </Key>
+          <Property Name="subjects_id" Type="Int32" />
+          <Property Name="teachers_id" Type="Int32" />
+          <Property Name="DateYear" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Subjects" Relationship="Self.fk_subjects_id" FromRole="Guide" ToRole="Subjects" />
+          <NavigationProperty Name="Teachers" Relationship="Self.fk_teachers_id" FromRole="Guide" ToRole="Teachers" />
+        </EntityType>
+        <EntityType Name="Journal">
+          <Key>
+            <PropertyRef Name="Journal_id" />
+          </Key>
+          <Property Name="Journal_id" Type="Int32" Nullable="false" />
+          <Property Name="students_code" Type="Int32" />
+          <Property Name="StageOne" Type="Int32" />
+          <Property Name="StageTwo" Type="Int32" />
+          <Property Name="Result" Type="Int32" />
+          <NavigationProperty Name="Students" Relationship="Self.fk_students_code" FromRole="Journal" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Registr">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SaveWork">
+          <Key>
+            <PropertyRef Name="SaveWork_id" />
+          </Key>
+          <Property Name="SaveWork_id" Type="Int32" Nullable="false" />
+          <Property Name="SaveWork_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="Student_id" />
+          </Key>
+          <Property Name="Student_id" Type="Int32" Nullable="false" />
+          <Property Name="Fam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="groups_code" Type="Int32" />
+          <NavigationProperty Name="Course_Work" Relationship="Self.fk_Student_code" FromRole="Students" ToRole="Course_Work" />
+          <NavigationProperty Name="Groups" Relationship="Self.fk_groups_code" FromRole="Students" ToRole="Groups" />
+          <NavigationProperty Name="Journal" Relationship="Self.fk_students_code" FromRole="Students" ToRole="Journal" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="Subjects_id" />
+          </Key>
+          <Property Name="Subjects_id" Type="Int32" Nullable="false" />
+          <Property Name="Subjects_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Course_Work" Relationship="Self.fk_Subject_code" FromRole="Subjects" ToRole="Course_Work" />
+          <NavigationProperty Name="Guide" Relationship="Self.fk_subjects_id" FromRole="Subjects" ToRole="Guide" />
+        </EntityType>
+        <EntityType Name="Teachers">
+          <Key>
+            <PropertyRef Name="Teachers_id" />
+          </Key>
+          <Property Name="Teachers_id" Type="Int32" Nullable="false" />
+          <Property Name="Teachers_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Guide" Relationship="Self.fk_teachers_id" FromRole="Teachers" ToRole="Guide" />
+        </EntityType>
+        <Association Name="fk_disciplines_code">
+          <End Role="Disciplines" Type="Self.Disciplines" Multiplicity="0..1" />
+          <End Role="Course_Work" Type="Self.Course_Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disciplines">
+              <PropertyRef Name="Disciplines_id" />
+            </Principal>
+            <Dependent Role="Course_Work">
+              <PropertyRef Name="disciplines_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Student_code">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="Course_Work" Type="Self.Course_Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Student_id" />
+            </Principal>
+            <Dependent Role="Course_Work">
+              <PropertyRef Name="Student_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Subject_code">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
+          <End Role="Course_Work" Type="Self.Course_Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Subjects_id" />
+            </Principal>
+            <Dependent Role="Course_Work">
+              <PropertyRef Name="Subjects_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_disciplines_id">
+          <End Role="Disciplines" Type="Self.Disciplines" Multiplicity="0..1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disciplines">
+              <PropertyRef Name="Disciplines_id" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="disciplines_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_groups_code">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Groups_code" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="groups_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_subjects_id">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
+          <End Role="Guide" Type="Self.Guide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Subjects_id" />
+            </Principal>
+            <Dependent Role="Guide">
+              <PropertyRef Name="subjects_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_teachers_id">
+          <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1" />
+          <End Role="Guide" Type="Self.Guide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teachers">
+              <PropertyRef Name="Teachers_id" />
+            </Principal>
+            <Dependent Role="Guide">
+              <PropertyRef Name="teachers_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_students_code">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Student_id" />
+            </Principal>
+            <Dependent Role="Journal">
+              <PropertyRef Name="students_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Courses_projectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Course_Work" EntityType="Self.Course_Work" />
+          <EntitySet Name="Disciplines" EntityType="Self.Disciplines" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" />
+          <EntitySet Name="Guide" EntityType="Self.Guide" />
+          <EntitySet Name="Journal" EntityType="Self.Journal" />
+          <EntitySet Name="Registr" EntityType="Self.Registr" />
+          <EntitySet Name="SaveWork" EntityType="Self.SaveWork" />
+          <EntitySet Name="Students" EntityType="Self.Students" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" />
+          <EntitySet Name="Teachers" EntityType="Self.Teachers" />
+          <AssociationSet Name="fk_disciplines_code" Association="Self.fk_disciplines_code">
+            <End Role="Disciplines" EntitySet="Disciplines" />
+            <End Role="Course_Work" EntitySet="Course_Work" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Student_code" Association="Self.fk_Student_code">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Course_Work" EntitySet="Course_Work" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Subject_code" Association="Self.fk_Subject_code">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Course_Work" EntitySet="Course_Work" />
+          </AssociationSet>
+          <AssociationSet Name="fk_disciplines_id" Association="Self.fk_disciplines_id">
+            <End Role="Disciplines" EntitySet="Disciplines" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="fk_groups_code" Association="Self.fk_groups_code">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="fk_subjects_id" Association="Self.fk_subjects_id">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Guide" EntitySet="Guide" />
+          </AssociationSet>
+          <AssociationSet Name="fk_teachers_id" Association="Self.fk_teachers_id">
+            <End Role="Teachers" EntitySet="Teachers" />
+            <End Role="Guide" EntitySet="Guide" />
+          </AssociationSet>
+          <AssociationSet Name="fk_students_code" Association="Self.fk_students_code">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Journal" EntitySet="Journal" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Courses_projectModelContainer" CdmEntityContainer="Courses_projectEntities">
+          <EntitySetMapping Name="Course_Work">
+            <EntityTypeMapping TypeName="Courses_projectModel.Course_Work">
+              <MappingFragment StoreEntitySet="Course_Work">
+                <ScalarProperty Name="Subjects_code" ColumnName="Subjects_code" />
+                <ScalarProperty Name="Student_code" ColumnName="Student_code" />
+                <ScalarProperty Name="disciplines_code" ColumnName="disciplines_code" />
+                <ScalarProperty Name="Theme" ColumnName="Theme" />
+                <ScalarProperty Name="YearDate" ColumnName="YearDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Disciplines">
+            <EntityTypeMapping TypeName="Courses_projectModel.Disciplines">
+              <MappingFragment StoreEntitySet="Disciplines">
+                <ScalarProperty Name="Disciplines_id" ColumnName="Disciplines_id" />
+                <ScalarProperty Name="Disciplines_name" ColumnName="Disciplines_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="Courses_projectModel.Groups">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="Groups_code" ColumnName="Groups_code" />
+                <ScalarProperty Name="Groups_id" ColumnName="Groups_id" />
+                <ScalarProperty Name="disciplines_id" ColumnName="disciplines_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Guide">
+            <EntityTypeMapping TypeName="Courses_projectModel.Guide">
+              <MappingFragment StoreEntitySet="Guide">
+                <ScalarProperty Name="subjects_id" ColumnName="subjects_id" />
+                <ScalarProperty Name="teachers_id" ColumnName="teachers_id" />
+                <ScalarProperty Name="DateYear" ColumnName="DateYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Journal">
+            <EntityTypeMapping TypeName="Courses_projectModel.Journal">
+              <MappingFragment StoreEntitySet="Journal">
+                <ScalarProperty Name="Journal_id" ColumnName="Journal_id" />
+                <ScalarProperty Name="students_code" ColumnName="students_code" />
+                <ScalarProperty Name="StageOne" ColumnName="StageOne" />
+                <ScalarProperty Name="StageTwo" ColumnName="StageTwo" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registr">
+            <EntityTypeMapping TypeName="Courses_projectModel.Registr">
+              <MappingFragment StoreEntitySet="Registr">
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SaveWork">
+            <EntityTypeMapping TypeName="Courses_projectModel.SaveWork">
+              <MappingFragment StoreEntitySet="SaveWork">
+                <ScalarProperty Name="SaveWork_id" ColumnName="SaveWork_id" />
+                <ScalarProperty Name="SaveWork_name" ColumnName="SaveWork_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="Courses_projectModel.Students">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="Student_id" ColumnName="Student_id" />
+                <ScalarProperty Name="Fam" ColumnName="Fam" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Last_name" ColumnName="Last_name" />
+                <ScalarProperty Name="groups_code" ColumnName="groups_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="Courses_projectModel.Subjects">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="Subjects_id" ColumnName="Subjects_id" />
+                <ScalarProperty Name="Subjects_name" ColumnName="Subjects_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="Courses_projectModel.Teachers">
+              <MappingFragment StoreEntitySet="Teachers">
+                <ScalarProperty Name="Teachers_id" ColumnName="Teachers_id" />
+                <ScalarProperty Name="Teachers_name" ColumnName="Teachers_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

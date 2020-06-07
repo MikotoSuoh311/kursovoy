@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище Courses_projectModelContainer" CdmEntityContainer="Courses_projectEntities">
+    <EntitySetMapping Name="Course_Work">
+      <EntityTypeMapping TypeName="Courses_projectModel.Course_Work">
+        <MappingFragment StoreEntitySet="Course_Work">
+          <ScalarProperty Name="Subjects_code" ColumnName="Subjects_code" />
+          <ScalarProperty Name="Student_code" ColumnName="Student_code" />
+          <ScalarProperty Name="disciplines_code" ColumnName="disciplines_code" />
+          <ScalarProperty Name="Theme" ColumnName="Theme" />
+          <ScalarProperty Name="YearDate" ColumnName="YearDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Disciplines">
+      <EntityTypeMapping TypeName="Courses_projectModel.Disciplines">
+        <MappingFragment StoreEntitySet="Disciplines">
+          <ScalarProperty Name="Disciplines_id" ColumnName="Disciplines_id" />
+          <ScalarProperty Name="Disciplines_name" ColumnName="Disciplines_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="Courses_projectModel.Groups">
+        <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="Groups_code" ColumnName="Groups_code" />
+          <ScalarProperty Name="Groups_id" ColumnName="Groups_id" />
+          <ScalarProperty Name="disciplines_id" ColumnName="disciplines_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Guide">
+      <EntityTypeMapping TypeName="Courses_projectModel.Guide">
+        <MappingFragment StoreEntitySet="Guide">
+          <ScalarProperty Name="subjects_id" ColumnName="subjects_id" />
+          <ScalarProperty Name="teachers_id" ColumnName="teachers_id" />
+          <ScalarProperty Name="DateYear" ColumnName="DateYear" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Journal">
+      <EntityTypeMapping TypeName="Courses_projectModel.Journal">
+        <MappingFragment StoreEntitySet="Journal">
+          <ScalarProperty Name="Journal_id" ColumnName="Journal_id" />
+          <ScalarProperty Name="students_code" ColumnName="students_code" />
+          <ScalarProperty Name="StageOne" ColumnName="StageOne" />
+          <ScalarProperty Name="StageTwo" ColumnName="StageTwo" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Registr">
+      <EntityTypeMapping TypeName="Courses_projectModel.Registr">
+        <MappingFragment StoreEntitySet="Registr">
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SaveWork">
+      <EntityTypeMapping TypeName="Courses_projectModel.SaveWork">
+        <MappingFragment StoreEntitySet="SaveWork">
+          <ScalarProperty Name="SaveWork_id" ColumnName="SaveWork_id" />
+          <ScalarProperty Name="SaveWork_name" ColumnName="SaveWork_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="Courses_projectModel.Students">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="Student_id" ColumnName="Student_id" />
+          <ScalarProperty Name="Fam" ColumnName="Fam" />
+          <ScalarProperty Name="Fname" ColumnName="Fname" />
+          <ScalarProperty Name="Last_name" ColumnName="Last_name" />
+          <ScalarProperty Name="groups_code" ColumnName="groups_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subjects">
+      <EntityTypeMapping TypeName="Courses_projectModel.Subjects">
+        <MappingFragment StoreEntitySet="Subjects">
+          <ScalarProperty Name="Subjects_id" ColumnName="Subjects_id" />
+          <ScalarProperty Name="Subjects_name" ColumnName="Subjects_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teachers">
+      <EntityTypeMapping TypeName="Courses_projectModel.Teachers">
+        <MappingFragment StoreEntitySet="Teachers">
+          <ScalarProperty Name="Teachers_id" ColumnName="Teachers_id" />
+          <ScalarProperty Name="Teachers_name" ColumnName="Teachers_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

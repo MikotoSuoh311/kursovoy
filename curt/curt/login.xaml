@@ -1,0 +1,19 @@
+﻿<Page x:Class="curt.login"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:curt"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="login">
+
+    <Grid>
+        <Label Content=" Введите логин:" HorizontalAlignment="Center" Margin="311,144,389,249" VerticalAlignment="Center"></Label>
+        <TextBox x:Name="textBox_login" HorizontalAlignment="Center" Height="24" Width="300" Margin="311,170,281,225" VerticalAlignment="Center"></TextBox>
+        <Label Content="Введите пароль:" HorizontalAlignment="Center" Margin="311,199,380,194" VerticalAlignment="Center"></Label>
+        <PasswordBox x:Name="password" HorizontalAlignment="Center" Height="24" Margin="311,225,281,176" VerticalAlignment="Center" Width="300"></PasswordBox>
+        <Button x:Name="regin" Click="regin_Click" Content="Регистрация" HorizontalAlignment="Center" Margin="419,266,278,154" RenderTransformOrigin="0.081,-0.624" Width="103"></Button>
+        <Button x:Name="enter" Content="Войти" Width="94" Click="enter_Click" HorizontalAlignment="Center" Margin="314,266,392,154"></Button>
+    </Grid>
+</Page>

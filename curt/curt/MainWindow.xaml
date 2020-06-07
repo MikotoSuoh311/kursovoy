@@ -1,0 +1,12 @@
+﻿<Window x:Class="curt.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:curt"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="950">
+
+    <Frame  x:Name="Frame" NavigationUIVisibility="Hidden" Margin="-122,-25,-8,-21" RenderTransformOrigin="0.506,0.523"/>
+
+</Window>
